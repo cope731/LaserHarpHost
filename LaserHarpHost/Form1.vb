@@ -75,6 +75,10 @@ Public Class Form1
     Dim ofd As New OpenFileDialog()
     Dim validMode As New Byte
     Dim pathList(11, 7) As String
+    'wav再生用WMP
+    Dim mediaPlayer0 As New WMPLib.WindowsMediaPlayer()
+    Dim mediaPlayer1 As New WMPLib.WindowsMediaPlayer()
+    Dim mediaPlayer2 As New WMPLib.WindowsMediaPlayer()
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -176,6 +180,8 @@ Public Class Form1
 
     End Sub
 
+
+
     Private Sub Path1_0_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path1_0.MouseDoubleClick
         PathSet(1, 0)
     End Sub
@@ -267,6 +273,8 @@ Public Class Form1
 
 
     End Function
+
+
     Private Function ModeChange(ByVal vMo As Byte)
         validMode = vMo
         'validModeの変更と、ボタン表示の変更
@@ -295,11 +303,27 @@ Public Class Form1
 
     Private Function PlaySound(ByVal pNum As Byte)
 
-        If 0 <= pNum <= 3 Then
+        If pNum = 0 Then
             If (Not String.IsNullOrEmpty(pathList(validMode, pNum))) Then
-                My.Computer.Audio.Play(pathList(validMode, pNum), AudioPlayMode.Background)
+                'オーディオファイルを指定する（自動的に再生される）
+                mediaPlayer0.URL = pathList(validMode, pNum)
+                '再生する
+                mediaPlayer0.controls.play()
             End If
-
+        ElseIf pNum = 1 Then
+            If (Not String.IsNullOrEmpty(pathList(validMode, pNum))) Then
+                'オーディオファイルを指定する（自動的に再生される）
+                mediaPlayer1.URL = pathList(validMode, pNum)
+                '再生する
+                mediaPlayer1.controls.play()
+            End If
+        ElseIf pNum = 2 Then
+            If (Not String.IsNullOrEmpty(pathList(validMode, pNum))) Then
+                'オーディオファイルを指定する（自動的に再生される）
+                mediaPlayer2.URL = pathList(validMode, pNum)
+                '再生する
+                mediaPlayer2.controls.play()
+            End If
         End If
 
     End Function
@@ -389,5 +413,4 @@ Public Class Form1
 
         End If
     End Sub
-
 End Class

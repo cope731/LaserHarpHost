@@ -23,7 +23,6 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Path1_0 = New System.Windows.Forms.TextBox()
         Me.Path1_1 = New System.Windows.Forms.TextBox()
         Me.Path1_2 = New System.Windows.Forms.TextBox()
@@ -51,12 +50,10 @@ Partial Class Form1
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ConnectButton = New System.Windows.Forms.Button()
-        Me.AxWindowsMediaPlayer1 = New AxWMPLib.AxWindowsMediaPlayer()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Path1_0
@@ -290,21 +287,11 @@ Partial Class Form1
         Me.ConnectButton.Text = "接続"
         Me.ConnectButton.UseVisualStyleBackColor = True
         '
-        'AxWindowsMediaPlayer1
-        '
-        Me.AxWindowsMediaPlayer1.Enabled = True
-        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(576, 295)
-        Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
-        Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(75, 23)
-        Me.AxWindowsMediaPlayer1.TabIndex = 15
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(993, 472)
-        Me.Controls.Add(Me.AxWindowsMediaPlayer1)
         Me.Controls.Add(Me.ConnectButton)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.cmbHandShake)
@@ -329,7 +316,6 @@ Partial Class Form1
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -362,5 +348,4 @@ Partial Class Form1
     Friend WithEvents SerialPort1 As SerialPort
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents ConnectButton As Button
-    Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
 End Class
