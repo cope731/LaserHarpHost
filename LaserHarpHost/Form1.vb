@@ -228,7 +228,78 @@ Public Class Form1
 
     Private Sub Path4_2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path4_2.MouseDoubleClick
         PathSet(4, 2)
+    End Sub
 
+    Private Sub Path5_0_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path5_0.MouseDoubleClick
+        PathSet(5, 0)
+    End Sub
+
+    Private Sub Path5_1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path5_1.MouseDoubleClick
+        PathSet(5, 1)
+    End Sub
+
+    Private Sub Path5_2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path5_2.MouseDoubleClick
+        PathSet(5, 2)
+    End Sub
+
+    Private Sub Path6_0_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path6_0.MouseDoubleClick
+        PathSet(6, 0)
+    End Sub
+
+    Private Sub Path6_1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path6_1.MouseDoubleClick
+        PathSet(6, 1)
+    End Sub
+
+    Private Sub Path6_2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path6_2.MouseDoubleClick
+        PathSet(6, 2)
+    End Sub
+
+    Private Sub Path7_0_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path7_0.MouseDoubleClick
+        PathSet(7, 0)
+    End Sub
+
+    Private Sub Path7_1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path7_1.MouseDoubleClick
+        PathSet(7, 1)
+    End Sub
+
+    Private Sub Path7_2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path7_2.MouseDoubleClick
+        PathSet(7, 2)
+    End Sub
+
+    Private Sub Path8_0_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path8_0.MouseDoubleClick
+        PathSet(8, 0)
+    End Sub
+
+    Private Sub Path8_1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path8_1.MouseDoubleClick
+        PathSet(8, 1)
+    End Sub
+
+    Private Sub Path8_2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path8_2.MouseDoubleClick
+        PathSet(8, 2)
+    End Sub
+
+    Private Sub Path9_0_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path9_0.MouseDoubleClick
+        PathSet(9, 0)
+    End Sub
+
+    Private Sub Path9_1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path9_1.MouseDoubleClick
+        PathSet(9, 1)
+    End Sub
+
+    Private Sub Path9_2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path9_2.MouseDoubleClick
+        PathSet(9, 2)
+    End Sub
+
+    Private Sub Path0_0_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path0_0.MouseDoubleClick
+        PathSet(0, 0)
+    End Sub
+
+    Private Sub Path0_1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path0_1.MouseDoubleClick
+        PathSet(0, 1)
+    End Sub
+
+    Private Sub Path0_2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Path0_2.MouseDoubleClick
+        PathSet(0, 2)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -247,6 +318,30 @@ Public Class Form1
         ModeChange(4)
     End Sub
 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        ModeChange(5)
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        ModeChange(6)
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        ModeChange(7)
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        ModeChange(8)
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        ModeChange(9)
+    End Sub
+
+    Private Sub Button0_Click(sender As Object, e As EventArgs) Handles Button0.Click
+        ModeChange(0)
+    End Sub
+
     Private Sub KeyIn_KeyPress(sender As Object, e As KeyPressEventArgs) Handles KeyIn.KeyPress
         'テンキーからのモード変更
 
@@ -256,10 +351,16 @@ Public Class Form1
             KeyByte = Convert.ToInt16(e.KeyChar)
             KeyByte = KeyByte - 48
             ModeChange(KeyByte)
+        ElseIf e.KeyChar = "i" Then
+            PlaySound(0)
+        ElseIf e.KeyChar = "k" Then
+            PlaySound(1)
+        ElseIf e.KeyChar = "m" Then
+            PlaySound(2)
         End If
     End Sub
 
-    Private Function PathSet(ByVal num1 As Byte, num2 As Byte)
+    Private Sub PathSet(ByVal num1 As Byte, num2 As Byte)
         'ダイアログを表示する
         If ofd.ShowDialog() = DialogResult.OK Then
             pathList(num1, num2) = ofd.FileName
@@ -270,19 +371,17 @@ Public Class Form1
                 CType(cs(0), TextBox).Text = System.IO.Path.GetFileName(ofd.FileName)
             End If
         End If
+    End Sub
 
 
-    End Function
-
-
-    Private Function ModeChange(ByVal vMo As Byte)
+    Private Sub ModeChange(ByVal vMo As Byte)
         validMode = vMo
         'validModeの変更と、ボタン表示の変更
         Dim cs As Control() = Me.Controls.Find("Button1", True)
 
 
         'すべてのテキストボックスを初期色化
-        For i As Byte = 1 To 4
+        For i As Byte = 0 To 9
             cs = Me.Controls.Find("Button" + i.ToString, True)
             If cs.Length > 0 Then
                 CType(cs(0), Button).BackColor = SystemColors.ControlLight
@@ -299,9 +398,9 @@ Public Class Form1
             CType(cs(0), Button).ForeColor = SystemColors.Control
         End If
 
-    End Function
+    End Sub
 
-    Private Function PlaySound(ByVal pNum As Byte)
+    Private Sub PlaySound(ByVal pNum As Byte)
 
         If pNum = 0 Then
             If (Not String.IsNullOrEmpty(pathList(validMode, pNum))) Then
@@ -326,7 +425,7 @@ Public Class Form1
             End If
         End If
 
-    End Function
+    End Sub
 
     Private Sub SerialPort1_DataReceived(sender As Object, e As SerialDataReceivedEventArgs) Handles SerialPort1.DataReceived
         'シリアルポートをオープンしていない場合、処理を行わない.
@@ -412,5 +511,36 @@ Public Class Form1
             End Try
 
         End If
+    End Sub
+
+    'Stopボタン
+    Private Sub StopAll_Click(sender As Object, e As EventArgs) Handles StopAll.Click
+        mediaPlayer0.controls.stop()
+        mediaPlayer1.controls.stop()
+        mediaPlayer2.controls.stop()
+    End Sub
+
+    Private Sub Stop0_Click(sender As Object, e As EventArgs) Handles Stop0.Click
+        mediaPlayer0.controls.stop()
+    End Sub
+
+    Private Sub Stop1_Click(sender As Object, e As EventArgs) Handles Stop1.Click
+        mediaPlayer1.controls.stop()
+    End Sub
+
+    Private Sub Stop2_Click(sender As Object, e As EventArgs) Handles Stop2.Click
+        mediaPlayer2.controls.stop()
+    End Sub
+
+    Private Sub PlayButton0_Click(sender As Object, e As EventArgs) Handles PlayButton0.Click
+        PlaySound(0)
+    End Sub
+
+    Private Sub PlayButton1_Click(sender As Object, e As EventArgs) Handles PlayButton1.Click
+        PlaySound(1)
+    End Sub
+
+    Private Sub PlayButton2_Click(sender As Object, e As EventArgs) Handles PlayButton2.Click
+        PlaySound(2)
     End Sub
 End Class
