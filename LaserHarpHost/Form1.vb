@@ -74,7 +74,7 @@ Public Class Form1
 
     Dim ofd As New OpenFileDialog()
     Dim validMode As New Byte
-    Dim pathList(11, 7) As String
+    Dim pathList(9, 2) As String
     'wav再生用WMP
     Dim mediaPlayer0 As New WMPLib.WindowsMediaPlayer()
     Dim mediaPlayer1 As New WMPLib.WindowsMediaPlayer()
@@ -542,5 +542,120 @@ Public Class Form1
 
     Private Sub PlayButton2_Click(sender As Object, e As EventArgs) Handles PlayButton2.Click
         PlaySound(2)
+    End Sub
+
+    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
+        'ファイルへの保存
+
+        'SaveFileDialogクラスのインスタンスを作成
+        Dim sfd As New SaveFileDialog()
+
+        'はじめのファイル名を指定する
+        'はじめに「ファイル名」で表示される文字列を指定する
+        sfd.FileName = "新しいファイル.lhl"
+        'はじめに表示されるフォルダを指定する
+        '指定しない（空の文字列）の時は、現在のディレクトリが表示される
+        sfd.InitialDirectory = ""
+        '[ファイルの種類]に表示される選択肢を指定する
+        sfd.Filter = "LaserHarpListファイル(*.lhl)|*.lhl|すべてのファイル(*.*)|*.*"
+        '[ファイルの種類]ではじめに選択されるものを指定する
+        '2番目の「すべてのファイル」が選択されているようにする
+        sfd.FilterIndex = 1
+        'タイトルを設定する
+        sfd.Title = "保存先のファイルを選択してください"
+        'ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+        sfd.RestoreDirectory = True
+        '既に存在するファイル名を指定したとき警告する
+        'デフォルトでTrueなので指定する必要はない
+        sfd.OverwritePrompt = True
+        '存在しないパスが指定されたとき警告を表示する
+        'デフォルトでTrueなので指定する必要はない
+        sfd.CheckPathExists = True
+
+        'ダイアログを表示する
+        If sfd.ShowDialog() = DialogResult.OK Then
+            'OKボタンがクリックされたとき、書き込み開始
+
+            Dim write As New System.IO.StreamWriter(sfd.FileName, False, System.Text.Encoding.GetEncoding("shift_jis"))
+            Dim s As String = ""
+
+            For Each s In pathList
+                write.WriteLine(s)
+            Next
+            write.Close()
+        End If
+    End Sub
+
+    Private Sub LoadButton_Click(sender As Object, e As EventArgs) Handles LoadButton.Click
+        'OpenFileDialogクラスのインスタンスを作成
+        Dim Oofd As New OpenFileDialog()
+
+        'はじめのファイル名を指定する
+        'はじめに「ファイル名」で表示される文字列を指定する
+        Oofd.FileName = ""
+        'はじめに表示されるフォルダを指定する
+        '指定しない（空の文字列）の時は、現在のディレクトリが表示される
+        Oofd.InitialDirectory = ""
+        '[ファイルの種類]に表示される選択肢を指定する
+        '指定しないとすべてのファイルが表示される
+        Oofd.Filter = "LaserHarpListファイル(*.lhl)|*.lhl|すべてのファイル(*.*)|*.*"
+        '[ファイルの種類]ではじめに選択されるものを指定する
+        '2番目の「すべてのファイル」が選択されているようにする
+        Oofd.FilterIndex = 1
+        'タイトルを設定する
+        Oofd.Title = "開くファイルを選択してください"
+        'ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+        Oofd.RestoreDirectory = True
+        '存在しないファイルの名前が指定されたとき警告を表示する
+        'デフォルトでTrueなので指定する必要はない
+        Oofd.CheckFileExists = True
+        '存在しないパスが指定されたとき警告を表示する
+        'デフォルトでTrueなので指定する必要はない
+        Oofd.CheckPathExists = True
+
+        'ダイアログを表示する
+        If Oofd.ShowDialog() = DialogResult.OK Then
+            'OKボタンがクリックされたとき、選択されたファイル名を表示する
+            Console.WriteLine(Oofd.FileName)
+            Dim load As New System.IO.StreamReader(Oofd.FileName, System.Text.Encoding.GetEncoding("shift_jis"))
+            Dim Nofile As Integer = 0
+            Dim cntA As Byte = 0
+            Dim cntB As Byte = 0
+            Dim loadtext As String = ""
+            Dim cs As Control() = Me.Controls.Find("Path0_0", True)
+
+            '１行ずつ読み込む
+            While load.Peek() > -1
+                loadtext = load.ReadLine()
+                'ファイルの存在をチェックしてから読み込み
+                If System.IO.File.Exists(loadtext) Or loadtext = "" Then
+                    pathList(cntA, cntB) = loadtext
+
+                    cs = Me.Controls.Find("Path" + cntA.ToString + "_" + cntB.ToString, True)
+                    If cs.Length > 0 Then
+                        CType(cs(0), TextBox).Text = System.IO.Path.GetFileName(loadtext)
+                    End If
+
+                Else
+                    Nofile = Nofile + 1
+                End If
+
+                cntB = cntB + 1
+                If cntB = 3 Then
+                    cntB = 0
+                    cntA = cntA + 1
+                End If
+
+                If cntA = 10 Then
+                    Exit While
+                End If
+            End While
+
+            load.Close()
+
+            If Nofile > 0 Then
+                MsgBox("読み込めないファイルが" + Nofile.ToString + "個ありました。")
+            End If
+        End If
     End Sub
 End Class

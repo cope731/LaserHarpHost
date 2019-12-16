@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Path1_0 = New System.Windows.Forms.TextBox()
         Me.Path1_1 = New System.Windows.Forms.TextBox()
         Me.Path1_2 = New System.Windows.Forms.TextBox()
@@ -89,6 +90,8 @@ Partial Class Form1
         Me.PlayButton1 = New System.Windows.Forms.Button()
         Me.PlayButton2 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.SaveButton = New System.Windows.Forms.Button()
+        Me.LoadButton = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -285,7 +288,7 @@ Partial Class Form1
         Me.KeyIn.Name = "KeyIn"
         Me.KeyIn.Size = New System.Drawing.Size(888, 44)
         Me.KeyIn.TabIndex = 9
-        Me.KeyIn.Text = "数字ボタンから変更"
+        Me.KeyIn.Text = "キーボードから入力"
         Me.KeyIn.UseVisualStyleBackColor = True
         '
         'cmbPortName
@@ -598,7 +601,7 @@ Partial Class Form1
         '
         'StopAll
         '
-        Me.StopAll.Location = New System.Drawing.Point(947, 257)
+        Me.StopAll.Location = New System.Drawing.Point(947, 258)
         Me.StopAll.Name = "StopAll"
         Me.StopAll.Size = New System.Drawing.Size(149, 39)
         Me.StopAll.TabIndex = 22
@@ -607,7 +610,7 @@ Partial Class Form1
         '
         'Stop0
         '
-        Me.Stop0.Location = New System.Drawing.Point(947, 302)
+        Me.Stop0.Location = New System.Drawing.Point(947, 303)
         Me.Stop0.Name = "Stop0"
         Me.Stop0.Size = New System.Drawing.Size(149, 39)
         Me.Stop0.TabIndex = 23
@@ -616,7 +619,7 @@ Partial Class Form1
         '
         'Stop1
         '
-        Me.Stop1.Location = New System.Drawing.Point(947, 347)
+        Me.Stop1.Location = New System.Drawing.Point(947, 348)
         Me.Stop1.Name = "Stop1"
         Me.Stop1.Size = New System.Drawing.Size(149, 39)
         Me.Stop1.TabIndex = 24
@@ -625,7 +628,7 @@ Partial Class Form1
         '
         'Stop2
         '
-        Me.Stop2.Location = New System.Drawing.Point(947, 392)
+        Me.Stop2.Location = New System.Drawing.Point(947, 393)
         Me.Stop2.Name = "Stop2"
         Me.Stop2.Size = New System.Drawing.Size(149, 39)
         Me.Stop2.TabIndex = 25
@@ -635,7 +638,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(944, 235)
+        Me.Label1.Location = New System.Drawing.Point(944, 237)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(113, 18)
         Me.Label1.TabIndex = 26
@@ -643,7 +646,7 @@ Partial Class Form1
         '
         'PlayButton0
         '
-        Me.PlayButton0.Location = New System.Drawing.Point(947, 72)
+        Me.PlayButton0.Location = New System.Drawing.Point(947, 105)
         Me.PlayButton0.Name = "PlayButton0"
         Me.PlayButton0.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton0.TabIndex = 27
@@ -652,7 +655,7 @@ Partial Class Form1
         '
         'PlayButton1
         '
-        Me.PlayButton1.Location = New System.Drawing.Point(947, 117)
+        Me.PlayButton1.Location = New System.Drawing.Point(947, 150)
         Me.PlayButton1.Name = "PlayButton1"
         Me.PlayButton1.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton1.TabIndex = 28
@@ -661,7 +664,7 @@ Partial Class Form1
         '
         'PlayButton2
         '
-        Me.PlayButton2.Location = New System.Drawing.Point(947, 162)
+        Me.PlayButton2.Location = New System.Drawing.Point(947, 195)
         Me.PlayButton2.Name = "PlayButton2"
         Me.PlayButton2.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton2.TabIndex = 29
@@ -671,17 +674,37 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(944, 51)
+        Me.Label2.Location = New System.Drawing.Point(944, 84)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(44, 18)
         Me.Label2.TabIndex = 30
         Me.Label2.Text = "再生"
+        '
+        'SaveButton
+        '
+        Me.SaveButton.Location = New System.Drawing.Point(947, 5)
+        Me.SaveButton.Name = "SaveButton"
+        Me.SaveButton.Size = New System.Drawing.Size(149, 35)
+        Me.SaveButton.TabIndex = 31
+        Me.SaveButton.Text = "SAVE"
+        Me.SaveButton.UseVisualStyleBackColor = True
+        '
+        'LoadButton
+        '
+        Me.LoadButton.Location = New System.Drawing.Point(947, 46)
+        Me.LoadButton.Name = "LoadButton"
+        Me.LoadButton.Size = New System.Drawing.Size(149, 35)
+        Me.LoadButton.TabIndex = 32
+        Me.LoadButton.Text = "LOAD"
+        Me.LoadButton.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1108, 444)
+        Me.Controls.Add(Me.LoadButton)
+        Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.PlayButton2)
         Me.Controls.Add(Me.PlayButton1)
@@ -717,8 +740,12 @@ Partial Class Form1
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.MaximizeBox = False
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "LaserHarpHost"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -810,4 +837,6 @@ Partial Class Form1
     Friend WithEvents PlayButton1 As Button
     Friend WithEvents PlayButton2 As Button
     Friend WithEvents Label2 As Label
+    Friend WithEvents SaveButton As Button
+    Friend WithEvents LoadButton As Button
 End Class
