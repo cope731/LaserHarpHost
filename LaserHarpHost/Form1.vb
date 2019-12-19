@@ -80,6 +80,22 @@ Public Class Form1
     Dim mediaPlayer1 As New WMPLib.WindowsMediaPlayer()
     Dim mediaPlayer2 As New WMPLib.WindowsMediaPlayer()
 
+#Region "MIDI出力系WinAPI関数および定数"
+
+    Declare Function midiOutOpen Lib "winmm.dll" (ByRef lphMidiOut As Integer, ByVal uDeviceID As Integer, ByVal dwCallback As Integer, ByVal dwInstance As Integer, ByVal dwFlags As Integer) As Integer
+
+    Declare Function midiOutShortMsg Lib "winmm.dll" (ByVal hMidiOut As Integer, ByVal dwMsg As Integer) As Integer
+
+    Declare Function midiOutClose Lib "winmm.dll" (ByVal hMidiOut As Integer) As Integer
+
+    Const MIDI_MAPPER As Integer = -1
+    Const MMSYSERR_NOERROR As Integer = 0
+    Const CALLBACK_NULL As Integer = &H0
+
+#End Region
+
+    ' MIDIデバイスID
+    Private hDevice As Integer
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         validMode = 1 'モードの初期化
@@ -182,6 +198,12 @@ Public Class Form1
         cmbPortName.SelectedIndex = My.Settings.Ind1
         cmbBaudRate.SelectedIndex = My.Settings.Ind2
         cmbHandShake.SelectedIndex = My.Settings.Ind3
+
+        If midiOutOpen(hDevice, MIDI_MAPPER, 0, 0, CALLBACK_NULL) <> MMSYSERR_NOERROR Then
+            MessageBox.Show("MIDIデバイスを開けませんでした。")
+            hDevice = 0
+            Return
+        End If
 
     End Sub
 
@@ -672,6 +694,8 @@ Public Class Form1
         My.Settings.Ind1 = cmbPortName.SelectedIndex
         My.Settings.Ind2 = cmbBaudRate.SelectedIndex
         My.Settings.Ind3 = cmbHandShake.SelectedIndex
+        'midiデバイスのクローズ
+        If hDevice <> 0 Then midiOutClose(hDevice)
     End Sub
 
     'Private Sub FuncText_KeyPress(sender As Object, e As KeyPressEventArgs) Handles FuncText.KeyPress
@@ -684,5 +708,19 @@ Public Class Form1
 
     Private Sub FuncText_TextChanged(sender As Object, e As EventArgs)
 
+    End Sub
+
+    ' マウスダウンで音を出す
+    Private Sub Button10_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Button10.MouseDown
+        ' C3の音をベロシティ127でノートオン
+        Dim msg As Byte() = New Byte() {&H90, 60, &H6E, 0}
+        midiOutShortMsg(hDevice, BitConverter.ToInt32(msg, 0))
+    End Sub
+
+    ' マウスアップで音を消す
+    Private Sub Button10_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Button10.MouseUp
+        ' C3の音をノートオフ
+        Dim msg As Byte() = New Byte() {&H80, 60, 0, 0}
+        midiOutShortMsg(hDevice, BitConverter.ToInt32(msg, 0))
     End Sub
 End Class

@@ -92,6 +92,7 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SaveButton = New System.Windows.Forms.Button()
         Me.LoadButton = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -698,12 +699,22 @@ Partial Class Form1
         Me.LoadButton.Text = "LOAD"
         Me.LoadButton.UseVisualStyleBackColor = True
         '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(862, 396)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(65, 34)
+        Me.Button10.TabIndex = 33
+        Me.Button10.Text = "Button10"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1104, 439)
+        Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.LoadButton)
         Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.Label2)
@@ -839,4 +850,5 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents SaveButton As Button
     Friend WithEvents LoadButton As Button
+    Friend WithEvents Button10 As Button
 End Class
