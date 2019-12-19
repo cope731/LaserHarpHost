@@ -178,6 +178,11 @@ Public Class Form1
         cmbHandShake.Items.Add(ctrl)
         cmbHandShake.SelectedIndex = 0
 
+        'シリアル通信の設定を復元
+        cmbPortName.SelectedIndex = My.Settings.Ind1
+        cmbBaudRate.SelectedIndex = My.Settings.Ind2
+        cmbHandShake.SelectedIndex = My.Settings.Ind3
+
     End Sub
 
 
@@ -357,6 +362,10 @@ Public Class Form1
             PlaySound(1)
         ElseIf e.KeyChar = "m" Then
             PlaySound(2)
+        ElseIf e.KeyChar = "s" Then
+            mediaPlayer0.controls.stop()
+            mediaPlayer1.controls.stop()
+            mediaPlayer2.controls.stop()
         End If
     End Sub
 
@@ -365,7 +374,7 @@ Public Class Form1
         If ofd.ShowDialog() = DialogResult.OK Then
             pathList(num1, num2) = ofd.FileName
             'OKボタンがクリックされたとき、選択されたファイル名を表示する
-            Dim cs As Control() = Me.Controls.Find("Button1", True)
+            Dim cs As Control() = Me.Controls.Find("Path0_0", True)
             cs = Me.Controls.Find("Path" + num1.ToString + "_" + num2.ToString, True)
             If cs.Length > 0 Then
                 CType(cs(0), TextBox).Text = System.IO.Path.GetFileName(ofd.FileName)
@@ -616,7 +625,6 @@ Public Class Form1
         'ダイアログを表示する
         If Oofd.ShowDialog() = DialogResult.OK Then
             'OKボタンがクリックされたとき、選択されたファイル名を表示する
-            Console.WriteLine(Oofd.FileName)
             Dim load As New System.IO.StreamReader(Oofd.FileName, System.Text.Encoding.GetEncoding("shift_jis"))
             Dim Nofile As Integer = 0
             Dim cntA As Byte = 0
@@ -657,5 +665,24 @@ Public Class Form1
                 MsgBox("読み込めないファイルが" + Nofile.ToString + "個ありました。")
             End If
         End If
+    End Sub
+
+    Private Sub Form1_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        '終了時にシリアル通信の設定を保存
+        My.Settings.Ind1 = cmbPortName.SelectedIndex
+        My.Settings.Ind2 = cmbBaudRate.SelectedIndex
+        My.Settings.Ind3 = cmbHandShake.SelectedIndex
+    End Sub
+
+    'Private Sub FuncText_KeyPress(sender As Object, e As KeyPressEventArgs) Handles FuncText.KeyPress
+
+    '押されたキーが数値以外なら、入力を無効にする
+    'If (e.KeyChar < "0"c OrElse "9"c < e.KeyChar) AndAlso e.KeyChar <> ControlChars.Back AndAlso e.KeyChar <> ControlChars.CrLf Then
+    '       e.Handled = True
+    'End If
+    'End Sub
+
+    Private Sub FuncText_TextChanged(sender As Object, e As EventArgs)
+
     End Sub
 End Class

@@ -700,9 +700,10 @@ Partial Class Form1
         '
         'Form1
         '
+        Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1108, 444)
+        Me.ClientSize = New System.Drawing.Size(1104, 439)
         Me.Controls.Add(Me.LoadButton)
         Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.Label2)
@@ -742,7 +743,6 @@ Partial Class Form1
         Me.Controls.Add(Me.Button1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "LaserHarpHost"
