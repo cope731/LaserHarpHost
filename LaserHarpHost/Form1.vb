@@ -343,7 +343,7 @@ Public Class Form1
     End Sub
 
     Private Sub KeyIn_KeyPress(sender As Object, e As KeyPressEventArgs) Handles KeyIn.KeyPress
-        'テンキーからのモード変更
+        'キーからのモード変更
 
         If IsNumeric(e.KeyChar) = True Then
             '入力されたキーが数値ならByte型に変換し、ModeChangeを行う
@@ -357,6 +357,10 @@ Public Class Form1
             PlaySound(1)
         ElseIf e.KeyChar = "m" Then
             PlaySound(2)
+        ElseIf e.KeyChar = "s" Then
+            mediaPlayer0.controls.stop()
+            mediaPlayer1.controls.stop()
+            mediaPlayer2.controls.stop()
         End If
     End Sub
 

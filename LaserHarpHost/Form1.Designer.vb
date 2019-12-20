@@ -84,7 +84,6 @@ Partial Class Form1
         Me.StopAll = New System.Windows.Forms.Button()
         Me.Stop0 = New System.Windows.Forms.Button()
         Me.Stop1 = New System.Windows.Forms.Button()
-        Me.Stop2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PlayButton0 = New System.Windows.Forms.Button()
         Me.PlayButton1 = New System.Windows.Forms.Button()
@@ -92,6 +91,7 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SaveButton = New System.Windows.Forms.Button()
         Me.LoadButton = New System.Windows.Forms.Button()
+        Me.Stop2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -294,7 +294,7 @@ Partial Class Form1
         'cmbPortName
         '
         Me.cmbPortName.FormattingEnabled = True
-        Me.cmbPortName.Location = New System.Drawing.Point(27, 406)
+        Me.cmbPortName.Location = New System.Drawing.Point(27, 400)
         Me.cmbPortName.Name = "cmbPortName"
         Me.cmbPortName.Size = New System.Drawing.Size(187, 26)
         Me.cmbPortName.TabIndex = 10
@@ -302,7 +302,7 @@ Partial Class Form1
         'cmbBaudRate
         '
         Me.cmbBaudRate.FormattingEnabled = True
-        Me.cmbBaudRate.Location = New System.Drawing.Point(227, 406)
+        Me.cmbBaudRate.Location = New System.Drawing.Point(227, 400)
         Me.cmbBaudRate.Name = "cmbBaudRate"
         Me.cmbBaudRate.Size = New System.Drawing.Size(187, 26)
         Me.cmbBaudRate.TabIndex = 11
@@ -310,7 +310,7 @@ Partial Class Form1
         'cmbHandShake
         '
         Me.cmbHandShake.FormattingEnabled = True
-        Me.cmbHandShake.Location = New System.Drawing.Point(420, 406)
+        Me.cmbHandShake.Location = New System.Drawing.Point(420, 400)
         Me.cmbHandShake.Name = "cmbHandShake"
         Me.cmbHandShake.Size = New System.Drawing.Size(215, 26)
         Me.cmbHandShake.TabIndex = 12
@@ -320,7 +320,7 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(828, 406)
+        Me.TextBox1.Location = New System.Drawing.Point(828, 400)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.Size = New System.Drawing.Size(21, 25)
@@ -328,7 +328,7 @@ Partial Class Form1
         '
         'ConnectButton
         '
-        Me.ConnectButton.Location = New System.Drawing.Point(641, 401)
+        Me.ConnectButton.Location = New System.Drawing.Point(641, 395)
         Me.ConnectButton.Name = "ConnectButton"
         Me.ConnectButton.Size = New System.Drawing.Size(181, 35)
         Me.ConnectButton.TabIndex = 14
@@ -626,15 +626,6 @@ Partial Class Form1
         Me.Stop1.Text = "１弦ストップ"
         Me.Stop1.UseVisualStyleBackColor = True
         '
-        'Stop2
-        '
-        Me.Stop2.Location = New System.Drawing.Point(947, 393)
-        Me.Stop2.Name = "Stop2"
-        Me.Stop2.Size = New System.Drawing.Size(149, 39)
-        Me.Stop2.TabIndex = 25
-        Me.Stop2.Text = "２弦ストップ"
-        Me.Stop2.UseVisualStyleBackColor = True
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -698,11 +689,22 @@ Partial Class Form1
         Me.LoadButton.Text = "LOAD"
         Me.LoadButton.UseVisualStyleBackColor = True
         '
+        'Stop2
+        '
+        Me.Stop2.Location = New System.Drawing.Point(947, 393)
+        Me.Stop2.Name = "Stop2"
+        Me.Stop2.Size = New System.Drawing.Size(149, 39)
+        Me.Stop2.TabIndex = 25
+        Me.Stop2.Text = "２弦ストップ"
+        Me.Stop2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1108, 444)
+        Me.AutoSize = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ClientSize = New System.Drawing.Size(1104, 442)
         Me.Controls.Add(Me.LoadButton)
         Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.Label2)
@@ -740,11 +742,10 @@ Partial Class Form1
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.MaximizeBox = False
         Me.Name = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds
         Me.Text = "LaserHarpHost"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -831,7 +832,6 @@ Partial Class Form1
     Friend WithEvents StopAll As Button
     Friend WithEvents Stop0 As Button
     Friend WithEvents Stop1 As Button
-    Friend WithEvents Stop2 As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents PlayButton0 As Button
     Friend WithEvents PlayButton1 As Button
@@ -839,4 +839,5 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents SaveButton As Button
     Friend WithEvents LoadButton As Button
+    Friend WithEvents Stop2 As Button
 End Class
