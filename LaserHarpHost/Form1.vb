@@ -75,6 +75,7 @@ Public Class Form1
     Dim ofd As New OpenFileDialog()
     Dim validMode As New Byte
     Dim pathList(9, 2) As String
+    Dim lhlList(4) As String
     'wav再生用WMP
     Dim mediaPlayer0 As New WMPLib.WindowsMediaPlayer()
     Dim mediaPlayer1 As New WMPLib.WindowsMediaPlayer()
@@ -82,7 +83,8 @@ Public Class Form1
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        validMode = 1 'モードの初期化
+        ModeChange(1) 'モードの初期化
+        LoadingFile.Text = ""
 
         '「ファイルを開く」ダイアログ初期設定
 
@@ -361,11 +363,34 @@ Public Class Form1
             mediaPlayer0.controls.stop()
             mediaPlayer1.controls.stop()
             mediaPlayer2.controls.stop()
+        ElseIf e.KeyChar = "q" Then
+            LoadlhlFile(lhlList(0))
+        ElseIf e.KeyChar = "w" Then
+            LoadlhlFile(lhlList(1))
+        ElseIf e.KeyChar = "e" Then
+            LoadlhlFile(lhlList(2))
+        ElseIf e.KeyChar = "r" Then
+            LoadlhlFile(lhlList(3))
+        ElseIf e.KeyChar = "t" Then
+            LoadlhlFile(lhlList(4))
+        ElseIf e.KeyChar = " " Then
+            If AutoNextButton.Enabled = True Then
+                AutoNextButton.PerformClick()
+            End If
+        ElseIf e.KeyChar = "x" Then
+            If AutoPrevButton.Enabled = True Then
+                AutoPrevButton.PerformClick()
+            End If
+        ElseIf e.KeyChar = "z" Then
+            If AutoBackButton.Enabled = True Then
+                AutoBackButton.PerformClick()
+            End If
         End If
     End Sub
 
     Private Sub PathSet(ByVal num1 As Byte, num2 As Byte)
         'ダイアログを表示する
+        ofd.Filter = "waveファイル(*.wav;*.wave)|*.wav;*.wave|すべてのファイル(*.*)|*.*"
         If ofd.ShowDialog() = DialogResult.OK Then
             pathList(num1, num2) = ofd.FileName
             'OKボタンがクリックされたとき、選択されたファイル名を表示する
@@ -377,6 +402,20 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub lhlPathSet(ByVal num1 As Byte)
+
+        'ダイアログを表示する
+        ofd.Filter = "LaserHarpListファイル(*.lhl)|*.lhl|すべてのファイル(*.*)|*.*"
+        If ofd.ShowDialog() = DialogResult.OK Then
+            lhlList(num1) = ofd.FileName
+            'OKボタンがクリックされたとき、選択されたファイル名を表示する
+            Dim cs As Control() = Me.Controls.Find("lhlBox0", True)
+            cs = Me.Controls.Find("lhlBox" + num1.ToString, True)
+            If cs.Length > 0 Then
+                CType(cs(0), TextBox).Text = System.IO.Path.GetFileName(ofd.FileName)
+            End If
+        End If
+    End Sub
 
     Private Sub ModeChange(ByVal vMo As Byte)
         validMode = vMo
@@ -619,9 +658,13 @@ Public Class Form1
 
         'ダイアログを表示する
         If Oofd.ShowDialog() = DialogResult.OK Then
-            'OKボタンがクリックされたとき、選択されたファイル名を表示する
-            Console.WriteLine(Oofd.FileName)
-            Dim load As New System.IO.StreamReader(Oofd.FileName, System.Text.Encoding.GetEncoding("shift_jis"))
+            LoadlhlFile(Oofd.FileName)
+        End If
+    End Sub
+
+    Private Sub LoadlhlFile(ByVal FileName As String)
+        If System.IO.File.Exists(FileName) Then
+            Dim load As New System.IO.StreamReader(FileName, System.Text.Encoding.GetEncoding("shift_jis"))
             Dim Nofile As Integer = 0
             Dim cntA As Byte = 0
             Dim cntB As Byte = 0
@@ -630,6 +673,8 @@ Public Class Form1
 
             '１行ずつ読み込む
             While load.Peek() > -1
+                LoadingFile.Text = System.IO.Path.GetFileName(FileName)
+
                 loadtext = load.ReadLine()
                 'ファイルの存在をチェックしてから読み込み
                 If System.IO.File.Exists(loadtext) Or loadtext = "" Then
@@ -662,4 +707,243 @@ Public Class Form1
             End If
         End If
     End Sub
+
+    Private Sub LhlBox0_DoubleClick(sender As Object, e As EventArgs) Handles lhlBox0.DoubleClick
+        lhlPathSet(0)
+    End Sub
+
+    Private Sub LhlBox1_DoubleClick(sender As Object, e As EventArgs) Handles lhlBox1.DoubleClick
+        lhlPathSet(1)
+    End Sub
+
+    Private Sub LhlBox2_DoubleClick(sender As Object, e As EventArgs) Handles lhlBox2.DoubleClick
+        lhlPathSet(2)
+    End Sub
+
+    Private Sub LhlBox3_DoubleClick(sender As Object, e As EventArgs) Handles lhlBox3.DoubleClick
+        lhlPathSet(3)
+    End Sub
+
+    Private Sub LhlBox4_DoubleClick(sender As Object, e As EventArgs) Handles lhlBox4.DoubleClick
+        lhlPathSet(4)
+    End Sub
+
+    Private Sub lhlButton0_Click(sender As Object, e As EventArgs) Handles lhlButton0.Click
+        LoadlhlFile(lhlList(0))
+    End Sub
+
+    Private Sub lhlButton1_Click(sender As Object, e As EventArgs) Handles lhlButton1.Click
+        LoadlhlFile(lhlList(1))
+    End Sub
+
+    Private Sub lhlButton2_Click(sender As Object, e As EventArgs) Handles lhlButton2.Click
+        LoadlhlFile(lhlList(2))
+    End Sub
+
+    Private Sub lhlButton3_Click(sender As Object, e As EventArgs) Handles lhlButton3.Click
+        LoadlhlFile(lhlList(3))
+    End Sub
+
+    Private Sub lhlButton4_Click(sender As Object, e As EventArgs) Handles lhlButton4.Click
+        LoadlhlFile(lhlList(4))
+    End Sub
+
+    'Auto操作関連
+
+    Function getLineNumText(file_path As String)
+        Dim StReader As New System.IO.StreamReader(file_path)
+        Dim cnt As Long
+        While (StReader.Peek() >= 0)
+            StReader.ReadLine()
+            cnt += 1
+        End While
+        Return cnt
+    End Function
+
+    Dim AutoCommand() As String
+    Dim ComLength As Integer
+    Dim ComNum As Integer = 0
+
+    Private Sub AutoFileBox_DoubleClick(sender As Object, e As EventArgs) Handles AutoFileBox.DoubleClick
+
+        Dim fileName As String
+
+        'ダイアログを表示する
+        ofd.Filter = "Textファイル(*.txt)|*.txt|すべてのファイル(*.*)|*.*"
+        If ofd.ShowDialog() = DialogResult.OK Then
+            fileName = ofd.FileName
+            AutoFileBox.Text = System.IO.Path.GetFileName(ofd.FileName)
+
+            ' StreamReader の新しいインスタンスを生成する
+            Dim cReader As New System.IO.StreamReader(fileName, System.Text.Encoding.UTF8)
+            Dim s As Integer = 0
+            Dim lnum As Integer = getLineNumText(fileName)
+            ReDim AutoCommand(lnum - 1)
+
+            For i As Integer = 0 To lnum - 1
+                AutoCommand(i) = ""
+            Next
+
+            ' 読み込みできる文字がなくなるまで繰り返す
+            Dim readbuffer As String
+
+            While (cReader.Peek() >= 0)
+                readbuffer = cReader.ReadLine()
+                If readbuffer.Length = 2 Then
+                    If System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "L[0-4]") Or
+                        System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "C[0-9]") Or
+                         System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "P[0-2]") Then
+                        ' ファイルを 1 行ずつ読み込む
+                        ' 読み込んだものを追加で格納する
+                        AutoCommand(s) = readbuffer
+                        s += 1
+                    End If
+                End If
+            End While
+
+            cReader.Close()
+
+            ComLength = s
+            ComNum = 0
+
+            If ComLength > 1 Then
+                AutoPrevBox.Text = ""
+                AutoNowBox.Text = ""
+                AutoNextBox.Text = AutoCommand(0)
+            Else
+                For i As Integer = 0 To lnum - 1
+                    AutoCommand(i) = ""
+                Next
+            End If
+
+        End If
+
+        If ComLength < 2 Then
+            MsgBox("有効なコマンドが２つ以上のファイルを選択してください。")
+            AutoNextButton.Enabled = False
+            AutoPrevButton.Enabled = False
+            AutoBackButton.Enabled = False
+        Else
+            LabelCm.Text = "0/" + ComLength.ToString
+            AutoNextButton.Enabled = True
+            AutoPrevButton.Enabled = True
+            AutoBackButton.Enabled = True
+        End If
+    End Sub
+
+    Private Sub AutoNextButton_Click(sender As Object, e As EventArgs) Handles AutoNextButton.Click
+        If ComNum <= ComLength - 1 Then
+            Dim NowText As String = AutoNextBox.Text
+
+            'コマンドの種類別に実行
+            If Not NowText = "" Then
+                If System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]") Then
+                    If IsNumeric(NowText.Substring(1, 1)) Then
+                        LoadlhlFile(lhlList(NowText.Substring(1, 1)))
+                    End If
+                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "C[0-9]") Then
+                    If IsNumeric(NowText.Substring(1, 1)) Then
+                        ModeChange(NowText.Substring(1, 1))
+                    End If
+                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "P[0-2]") Then
+                    If IsNumeric(NowText.Substring(1, 1)) Then
+                        PlaySound(NowText.Substring(1, 1))
+                    End If
+                End If
+            End If
+
+
+
+            '表示の変更
+            If ComNum = 0 Then
+                AutoPrevBox.Text = ""
+                AutoNowBox.Text = AutoCommand(ComNum)
+                AutoNextBox.Text = AutoCommand(ComNum + 1)
+            ElseIf 1 <= ComNum And ComNum < (ComLength - 1) Then
+                AutoPrevBox.Text = AutoCommand(ComNum - 1)
+                AutoNowBox.Text = AutoCommand(ComNum)
+                AutoNextBox.Text = AutoCommand(ComNum + 1)
+            ElseIf ComNum = (ComLength - 1) Then
+                AutoPrevBox.Text = AutoCommand(ComNum - 1)
+                AutoNowBox.Text = AutoCommand(ComNum)
+                AutoNextBox.Text = ""
+            End If
+
+            ComNum += 1
+
+        ElseIf ComNum > ComLength - 1 Then
+            ComNum = 0
+            AutoPrevBox.Text = ""
+            AutoNowBox.Text = ""
+            AutoNextBox.Text = AutoCommand(0)
+        End If
+
+        LabelCm.Text = ComNum.ToString + "/" + ComLength.ToString
+    End Sub
+
+    Private Sub AutoPrevButton_Click(sender As Object, e As EventArgs) Handles AutoPrevButton.Click
+        If 2 <= ComNum Then
+            Dim NowText As String = AutoPrevBox.Text
+
+            If Not NowText = "" Then
+                If System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]") Then
+                    If IsNumeric(NowText.Substring(1, 1)) Then
+                        LoadlhlFile(lhlList(NowText.Substring(1, 1)))
+                    End If
+                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "C[0-9]") Then
+                    If IsNumeric(NowText.Substring(1, 1)) Then
+                        ModeChange(NowText.Substring(1, 1))
+                    End If
+                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "P[0-2]") Then
+                    If IsNumeric(NowText.Substring(1, 1)) Then
+                        PlaySound(NowText.Substring(1, 1))
+                    End If
+                End If
+            End If
+
+
+
+            ComNum -= 1
+
+            If 2 <= ComNum Then
+                AutoPrevBox.Text = AutoCommand(ComNum - 2)
+                AutoNowBox.Text = AutoCommand(ComNum - 1)
+                AutoNextBox.Text = AutoCommand(ComNum)
+            ElseIf ComNum = 1 Then
+                AutoPrevBox.Text = ""
+                AutoNowBox.Text = AutoCommand(ComNum - 1)
+                AutoNextBox.Text = AutoCommand(ComNum)
+            End If
+
+        End If
+
+        LabelCm.Text = ComNum.ToString + "/" + ComLength.ToString
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles AutoBackButton.Click
+        ComNum = 0
+        AutoPrevBox.Text = ""
+        AutoNowBox.Text = ""
+        AutoNextBox.Text = AutoCommand(0)
+
+        Dim NowText As String = AutoNextBox.Text
+        If Not NowText = "" Then
+            If System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]") Then
+                If IsNumeric(NowText.Substring(1, 1)) Then
+                    LoadlhlFile(lhlList(NowText.Substring(1, 1)))
+                End If
+            ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "C[0-9]") Then
+                If IsNumeric(NowText.Substring(1, 1)) Then
+                    ModeChange(NowText.Substring(1, 1))
+                End If
+            ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "P[0-2]") Then
+                If IsNumeric(NowText.Substring(1, 1)) Then
+                    PlaySound(NowText.Substring(1, 1))
+                End If
+            End If
+        End If
+
+        LabelCm.Text = "1/" + ComLength.ToString
+    End Sub
+
 End Class

@@ -92,6 +92,26 @@ Partial Class Form1
         Me.SaveButton = New System.Windows.Forms.Button()
         Me.LoadButton = New System.Windows.Forms.Button()
         Me.Stop2 = New System.Windows.Forms.Button()
+        Me.lhlBox0 = New System.Windows.Forms.TextBox()
+        Me.lhlButton0 = New System.Windows.Forms.Button()
+        Me.lhlBox1 = New System.Windows.Forms.TextBox()
+        Me.lhlButton1 = New System.Windows.Forms.Button()
+        Me.lhlBox2 = New System.Windows.Forms.TextBox()
+        Me.lhlButton2 = New System.Windows.Forms.Button()
+        Me.lhlButton3 = New System.Windows.Forms.Button()
+        Me.lhlBox3 = New System.Windows.Forms.TextBox()
+        Me.lhlBox4 = New System.Windows.Forms.TextBox()
+        Me.lhlButton4 = New System.Windows.Forms.Button()
+        Me.LoadingFile = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.AutoPrevButton = New System.Windows.Forms.Button()
+        Me.AutoNextButton = New System.Windows.Forms.Button()
+        Me.AutoNowBox = New System.Windows.Forms.TextBox()
+        Me.AutoFileBox = New System.Windows.Forms.TextBox()
+        Me.AutoNextBox = New System.Windows.Forms.TextBox()
+        Me.AutoPrevBox = New System.Windows.Forms.TextBox()
+        Me.LabelCm = New System.Windows.Forms.Label()
+        Me.AutoBackButton = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -294,7 +314,7 @@ Partial Class Form1
         'cmbPortName
         '
         Me.cmbPortName.FormattingEnabled = True
-        Me.cmbPortName.Location = New System.Drawing.Point(27, 400)
+        Me.cmbPortName.Location = New System.Drawing.Point(12, 430)
         Me.cmbPortName.Name = "cmbPortName"
         Me.cmbPortName.Size = New System.Drawing.Size(187, 26)
         Me.cmbPortName.TabIndex = 10
@@ -302,7 +322,7 @@ Partial Class Form1
         'cmbBaudRate
         '
         Me.cmbBaudRate.FormattingEnabled = True
-        Me.cmbBaudRate.Location = New System.Drawing.Point(227, 400)
+        Me.cmbBaudRate.Location = New System.Drawing.Point(205, 430)
         Me.cmbBaudRate.Name = "cmbBaudRate"
         Me.cmbBaudRate.Size = New System.Drawing.Size(187, 26)
         Me.cmbBaudRate.TabIndex = 11
@@ -310,7 +330,7 @@ Partial Class Form1
         'cmbHandShake
         '
         Me.cmbHandShake.FormattingEnabled = True
-        Me.cmbHandShake.Location = New System.Drawing.Point(420, 400)
+        Me.cmbHandShake.Location = New System.Drawing.Point(398, 430)
         Me.cmbHandShake.Name = "cmbHandShake"
         Me.cmbHandShake.Size = New System.Drawing.Size(215, 26)
         Me.cmbHandShake.TabIndex = 12
@@ -320,7 +340,8 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(828, 400)
+        Me.TextBox1.Location = New System.Drawing.Point(806, 431)
+        Me.TextBox1.MaxLength = 1
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.Size = New System.Drawing.Size(21, 25)
@@ -328,7 +349,7 @@ Partial Class Form1
         '
         'ConnectButton
         '
-        Me.ConnectButton.Location = New System.Drawing.Point(641, 395)
+        Me.ConnectButton.Location = New System.Drawing.Point(619, 426)
         Me.ConnectButton.Name = "ConnectButton"
         Me.ConnectButton.Size = New System.Drawing.Size(181, 35)
         Me.ConnectButton.TabIndex = 14
@@ -601,16 +622,16 @@ Partial Class Form1
         '
         'StopAll
         '
-        Me.StopAll.Location = New System.Drawing.Point(947, 258)
+        Me.StopAll.Location = New System.Drawing.Point(947, 280)
         Me.StopAll.Name = "StopAll"
         Me.StopAll.Size = New System.Drawing.Size(149, 39)
         Me.StopAll.TabIndex = 22
-        Me.StopAll.Text = "全弦ストップ"
+        Me.StopAll.Text = "全弦ストップ[S]"
         Me.StopAll.UseVisualStyleBackColor = True
         '
         'Stop0
         '
-        Me.Stop0.Location = New System.Drawing.Point(947, 303)
+        Me.Stop0.Location = New System.Drawing.Point(946, 327)
         Me.Stop0.Name = "Stop0"
         Me.Stop0.Size = New System.Drawing.Size(149, 39)
         Me.Stop0.TabIndex = 23
@@ -619,7 +640,7 @@ Partial Class Form1
         '
         'Stop1
         '
-        Me.Stop1.Location = New System.Drawing.Point(947, 348)
+        Me.Stop1.Location = New System.Drawing.Point(947, 372)
         Me.Stop1.Name = "Stop1"
         Me.Stop1.Size = New System.Drawing.Size(149, 39)
         Me.Stop1.TabIndex = 24
@@ -629,7 +650,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(944, 237)
+        Me.Label1.Location = New System.Drawing.Point(944, 259)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(113, 18)
         Me.Label1.TabIndex = 26
@@ -637,35 +658,35 @@ Partial Class Form1
         '
         'PlayButton0
         '
-        Me.PlayButton0.Location = New System.Drawing.Point(947, 105)
+        Me.PlayButton0.Location = New System.Drawing.Point(947, 127)
         Me.PlayButton0.Name = "PlayButton0"
         Me.PlayButton0.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton0.TabIndex = 27
-        Me.PlayButton0.Text = "０"
+        Me.PlayButton0.Text = "０[I]"
         Me.PlayButton0.UseVisualStyleBackColor = True
         '
         'PlayButton1
         '
-        Me.PlayButton1.Location = New System.Drawing.Point(947, 150)
+        Me.PlayButton1.Location = New System.Drawing.Point(946, 172)
         Me.PlayButton1.Name = "PlayButton1"
         Me.PlayButton1.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton1.TabIndex = 28
-        Me.PlayButton1.Text = "１"
+        Me.PlayButton1.Text = "１[K]"
         Me.PlayButton1.UseVisualStyleBackColor = True
         '
         'PlayButton2
         '
-        Me.PlayButton2.Location = New System.Drawing.Point(947, 195)
+        Me.PlayButton2.Location = New System.Drawing.Point(947, 217)
         Me.PlayButton2.Name = "PlayButton2"
         Me.PlayButton2.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton2.TabIndex = 29
-        Me.PlayButton2.Text = "２"
+        Me.PlayButton2.Text = "２[M]"
         Me.PlayButton2.UseVisualStyleBackColor = True
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(944, 84)
+        Me.Label2.Location = New System.Drawing.Point(944, 106)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(44, 18)
         Me.Label2.TabIndex = 30
@@ -673,7 +694,7 @@ Partial Class Form1
         '
         'SaveButton
         '
-        Me.SaveButton.Location = New System.Drawing.Point(947, 5)
+        Me.SaveButton.Location = New System.Drawing.Point(946, 27)
         Me.SaveButton.Name = "SaveButton"
         Me.SaveButton.Size = New System.Drawing.Size(149, 35)
         Me.SaveButton.TabIndex = 31
@@ -682,7 +703,7 @@ Partial Class Form1
         '
         'LoadButton
         '
-        Me.LoadButton.Location = New System.Drawing.Point(947, 46)
+        Me.LoadButton.Location = New System.Drawing.Point(946, 68)
         Me.LoadButton.Name = "LoadButton"
         Me.LoadButton.Size = New System.Drawing.Size(149, 35)
         Me.LoadButton.TabIndex = 32
@@ -691,12 +712,193 @@ Partial Class Form1
         '
         'Stop2
         '
-        Me.Stop2.Location = New System.Drawing.Point(947, 393)
+        Me.Stop2.Location = New System.Drawing.Point(947, 417)
         Me.Stop2.Name = "Stop2"
         Me.Stop2.Size = New System.Drawing.Size(149, 39)
         Me.Stop2.TabIndex = 25
         Me.Stop2.Text = "２弦ストップ"
         Me.Stop2.UseVisualStyleBackColor = True
+        '
+        'lhlBox0
+        '
+        Me.lhlBox0.Location = New System.Drawing.Point(1105, 81)
+        Me.lhlBox0.Name = "lhlBox0"
+        Me.lhlBox0.ReadOnly = True
+        Me.lhlBox0.Size = New System.Drawing.Size(165, 25)
+        Me.lhlBox0.TabIndex = 3
+        '
+        'lhlButton0
+        '
+        Me.lhlButton0.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.lhlButton0.Location = New System.Drawing.Point(1105, 111)
+        Me.lhlButton0.Name = "lhlButton0"
+        Me.lhlButton0.Size = New System.Drawing.Size(165, 39)
+        Me.lhlButton0.TabIndex = 33
+        Me.lhlButton0.Text = "0[Q]"
+        Me.lhlButton0.UseVisualStyleBackColor = False
+        '
+        'lhlBox1
+        '
+        Me.lhlBox1.Location = New System.Drawing.Point(1105, 157)
+        Me.lhlBox1.Name = "lhlBox1"
+        Me.lhlBox1.ReadOnly = True
+        Me.lhlBox1.Size = New System.Drawing.Size(165, 25)
+        Me.lhlBox1.TabIndex = 3
+        '
+        'lhlButton1
+        '
+        Me.lhlButton1.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.lhlButton1.Location = New System.Drawing.Point(1105, 185)
+        Me.lhlButton1.Name = "lhlButton1"
+        Me.lhlButton1.Size = New System.Drawing.Size(165, 39)
+        Me.lhlButton1.TabIndex = 33
+        Me.lhlButton1.Text = "1[W]"
+        Me.lhlButton1.UseVisualStyleBackColor = False
+        '
+        'lhlBox2
+        '
+        Me.lhlBox2.Location = New System.Drawing.Point(1105, 236)
+        Me.lhlBox2.Name = "lhlBox2"
+        Me.lhlBox2.ReadOnly = True
+        Me.lhlBox2.Size = New System.Drawing.Size(165, 25)
+        Me.lhlBox2.TabIndex = 3
+        '
+        'lhlButton2
+        '
+        Me.lhlButton2.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.lhlButton2.Location = New System.Drawing.Point(1105, 264)
+        Me.lhlButton2.Name = "lhlButton2"
+        Me.lhlButton2.Size = New System.Drawing.Size(165, 39)
+        Me.lhlButton2.TabIndex = 33
+        Me.lhlButton2.Text = "2[E]"
+        Me.lhlButton2.UseVisualStyleBackColor = False
+        '
+        'lhlButton3
+        '
+        Me.lhlButton3.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.lhlButton3.Location = New System.Drawing.Point(1104, 340)
+        Me.lhlButton3.Name = "lhlButton3"
+        Me.lhlButton3.Size = New System.Drawing.Size(165, 39)
+        Me.lhlButton3.TabIndex = 33
+        Me.lhlButton3.Text = "3[R]"
+        Me.lhlButton3.UseVisualStyleBackColor = False
+        '
+        'lhlBox3
+        '
+        Me.lhlBox3.Location = New System.Drawing.Point(1105, 312)
+        Me.lhlBox3.Name = "lhlBox3"
+        Me.lhlBox3.ReadOnly = True
+        Me.lhlBox3.Size = New System.Drawing.Size(165, 25)
+        Me.lhlBox3.TabIndex = 3
+        '
+        'lhlBox4
+        '
+        Me.lhlBox4.Location = New System.Drawing.Point(1105, 388)
+        Me.lhlBox4.Name = "lhlBox4"
+        Me.lhlBox4.ReadOnly = True
+        Me.lhlBox4.Size = New System.Drawing.Size(165, 25)
+        Me.lhlBox4.TabIndex = 3
+        '
+        'lhlButton4
+        '
+        Me.lhlButton4.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.lhlButton4.Location = New System.Drawing.Point(1105, 416)
+        Me.lhlButton4.Name = "lhlButton4"
+        Me.lhlButton4.Size = New System.Drawing.Size(165, 39)
+        Me.lhlButton4.TabIndex = 33
+        Me.lhlButton4.Text = "4[T]"
+        Me.lhlButton4.UseVisualStyleBackColor = False
+        '
+        'LoadingFile
+        '
+        Me.LoadingFile.AutoSize = True
+        Me.LoadingFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LoadingFile.Location = New System.Drawing.Point(1102, 38)
+        Me.LoadingFile.Name = "LoadingFile"
+        Me.LoadingFile.Size = New System.Drawing.Size(93, 18)
+        Me.LoadingFile.TabIndex = 34
+        Me.LoadingFile.Text = "LoadingFile"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(1102, 12)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(172, 18)
+        Me.Label3.TabIndex = 35
+        Me.Label3.Text = "読み込んだLHLファイル"
+        '
+        'AutoPrevButton
+        '
+        Me.AutoPrevButton.Enabled = False
+        Me.AutoPrevButton.Location = New System.Drawing.Point(240, 388)
+        Me.AutoPrevButton.Name = "AutoPrevButton"
+        Me.AutoPrevButton.Size = New System.Drawing.Size(157, 31)
+        Me.AutoPrevButton.TabIndex = 36
+        Me.AutoPrevButton.Text = "Prev[X]"
+        Me.AutoPrevButton.UseVisualStyleBackColor = True
+        '
+        'AutoNextButton
+        '
+        Me.AutoNextButton.Enabled = False
+        Me.AutoNextButton.Location = New System.Drawing.Point(493, 388)
+        Me.AutoNextButton.Name = "AutoNextButton"
+        Me.AutoNextButton.Size = New System.Drawing.Size(157, 31)
+        Me.AutoNextButton.TabIndex = 37
+        Me.AutoNextButton.Text = "Next[Space]"
+        Me.AutoNextButton.UseVisualStyleBackColor = True
+        '
+        'AutoNowBox
+        '
+        Me.AutoNowBox.Location = New System.Drawing.Point(403, 391)
+        Me.AutoNowBox.Name = "AutoNowBox"
+        Me.AutoNowBox.ReadOnly = True
+        Me.AutoNowBox.Size = New System.Drawing.Size(84, 25)
+        Me.AutoNowBox.TabIndex = 38
+        '
+        'AutoFileBox
+        '
+        Me.AutoFileBox.Location = New System.Drawing.Point(746, 391)
+        Me.AutoFileBox.Name = "AutoFileBox"
+        Me.AutoFileBox.ReadOnly = True
+        Me.AutoFileBox.Size = New System.Drawing.Size(165, 25)
+        Me.AutoFileBox.TabIndex = 39
+        Me.AutoFileBox.Text = "Autoファイル[txt]を開く"
+        '
+        'AutoNextBox
+        '
+        Me.AutoNextBox.Location = New System.Drawing.Point(656, 391)
+        Me.AutoNextBox.Name = "AutoNextBox"
+        Me.AutoNextBox.ReadOnly = True
+        Me.AutoNextBox.Size = New System.Drawing.Size(84, 25)
+        Me.AutoNextBox.TabIndex = 40
+        '
+        'AutoPrevBox
+        '
+        Me.AutoPrevBox.Location = New System.Drawing.Point(150, 391)
+        Me.AutoPrevBox.Name = "AutoPrevBox"
+        Me.AutoPrevBox.ReadOnly = True
+        Me.AutoPrevBox.Size = New System.Drawing.Size(84, 25)
+        Me.AutoPrevBox.TabIndex = 41
+        '
+        'LabelCm
+        '
+        Me.LabelCm.AutoSize = True
+        Me.LabelCm.Location = New System.Drawing.Point(9, 395)
+        Me.LabelCm.Name = "LabelCm"
+        Me.LabelCm.Size = New System.Drawing.Size(35, 18)
+        Me.LabelCm.TabIndex = 42
+        Me.LabelCm.Text = "0/0"
+        '
+        'AutoBackButton
+        '
+        Me.AutoBackButton.Enabled = False
+        Me.AutoBackButton.Location = New System.Drawing.Point(62, 388)
+        Me.AutoBackButton.Name = "AutoBackButton"
+        Me.AutoBackButton.Size = New System.Drawing.Size(82, 31)
+        Me.AutoBackButton.TabIndex = 43
+        Me.AutoBackButton.Text = "Back[Z]"
+        Me.AutoBackButton.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -704,7 +906,27 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(1104, 442)
+        Me.ClientSize = New System.Drawing.Size(1277, 468)
+        Me.Controls.Add(Me.AutoBackButton)
+        Me.Controls.Add(Me.LabelCm)
+        Me.Controls.Add(Me.AutoPrevBox)
+        Me.Controls.Add(Me.AutoNextBox)
+        Me.Controls.Add(Me.AutoFileBox)
+        Me.Controls.Add(Me.AutoNowBox)
+        Me.Controls.Add(Me.AutoNextButton)
+        Me.Controls.Add(Me.AutoPrevButton)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.LoadingFile)
+        Me.Controls.Add(Me.lhlButton4)
+        Me.Controls.Add(Me.lhlButton3)
+        Me.Controls.Add(Me.lhlBox4)
+        Me.Controls.Add(Me.lhlButton2)
+        Me.Controls.Add(Me.lhlBox3)
+        Me.Controls.Add(Me.lhlBox2)
+        Me.Controls.Add(Me.lhlButton1)
+        Me.Controls.Add(Me.lhlBox1)
+        Me.Controls.Add(Me.lhlButton0)
+        Me.Controls.Add(Me.lhlBox0)
         Me.Controls.Add(Me.LoadButton)
         Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.Label2)
@@ -840,4 +1062,24 @@ Partial Class Form1
     Friend WithEvents SaveButton As Button
     Friend WithEvents LoadButton As Button
     Friend WithEvents Stop2 As Button
+    Friend WithEvents lhlBox0 As TextBox
+    Friend WithEvents lhlButton0 As Button
+    Friend WithEvents lhlBox1 As TextBox
+    Friend WithEvents lhlButton1 As Button
+    Friend WithEvents lhlBox2 As TextBox
+    Friend WithEvents lhlButton2 As Button
+    Friend WithEvents lhlButton3 As Button
+    Friend WithEvents lhlBox3 As TextBox
+    Friend WithEvents lhlBox4 As TextBox
+    Friend WithEvents lhlButton4 As Button
+    Friend WithEvents LoadingFile As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents AutoPrevButton As Button
+    Friend WithEvents AutoNextButton As Button
+    Friend WithEvents AutoNowBox As TextBox
+    Friend WithEvents AutoFileBox As TextBox
+    Friend WithEvents AutoNextBox As TextBox
+    Friend WithEvents AutoPrevBox As TextBox
+    Friend WithEvents LabelCm As Label
+    Friend WithEvents AutoBackButton As Button
 End Class
