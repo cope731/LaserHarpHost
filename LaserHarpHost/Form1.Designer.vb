@@ -622,7 +622,7 @@ Partial Class Form1
         '
         'StopAll
         '
-        Me.StopAll.Location = New System.Drawing.Point(947, 280)
+        Me.StopAll.Location = New System.Drawing.Point(946, 280)
         Me.StopAll.Name = "StopAll"
         Me.StopAll.Size = New System.Drawing.Size(149, 39)
         Me.StopAll.TabIndex = 22
@@ -640,7 +640,7 @@ Partial Class Form1
         '
         'Stop1
         '
-        Me.Stop1.Location = New System.Drawing.Point(947, 372)
+        Me.Stop1.Location = New System.Drawing.Point(946, 372)
         Me.Stop1.Name = "Stop1"
         Me.Stop1.Size = New System.Drawing.Size(149, 39)
         Me.Stop1.TabIndex = 24
@@ -658,7 +658,7 @@ Partial Class Form1
         '
         'PlayButton0
         '
-        Me.PlayButton0.Location = New System.Drawing.Point(947, 127)
+        Me.PlayButton0.Location = New System.Drawing.Point(946, 127)
         Me.PlayButton0.Name = "PlayButton0"
         Me.PlayButton0.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton0.TabIndex = 27
@@ -676,7 +676,7 @@ Partial Class Form1
         '
         'PlayButton2
         '
-        Me.PlayButton2.Location = New System.Drawing.Point(947, 217)
+        Me.PlayButton2.Location = New System.Drawing.Point(946, 217)
         Me.PlayButton2.Name = "PlayButton2"
         Me.PlayButton2.Size = New System.Drawing.Size(149, 39)
         Me.PlayButton2.TabIndex = 29
@@ -712,7 +712,7 @@ Partial Class Form1
         '
         'Stop2
         '
-        Me.Stop2.Location = New System.Drawing.Point(947, 417)
+        Me.Stop2.Location = New System.Drawing.Point(946, 417)
         Me.Stop2.Name = "Stop2"
         Me.Stop2.Size = New System.Drawing.Size(149, 39)
         Me.Stop2.TabIndex = 25
@@ -776,7 +776,7 @@ Partial Class Form1
         'lhlButton3
         '
         Me.lhlButton3.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.lhlButton3.Location = New System.Drawing.Point(1104, 340)
+        Me.lhlButton3.Location = New System.Drawing.Point(1105, 340)
         Me.lhlButton3.Name = "lhlButton3"
         Me.lhlButton3.Size = New System.Drawing.Size(165, 39)
         Me.lhlButton3.TabIndex = 33

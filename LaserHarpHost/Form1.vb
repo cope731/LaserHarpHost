@@ -789,10 +789,11 @@ Public Class Form1
 
             While (cReader.Peek() >= 0)
                 readbuffer = cReader.ReadLine()
-                If readbuffer.Length = 2 Then
+                If readbuffer.Length = 2 Or readbuffer.Length = 4 Then
                     If System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "L[0-4]") Or
                         System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "C[0-9]") Or
-                         System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "P[0-2]") Then
+                         System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "P[0-2]") Or
+                          System.Text.RegularExpressions.Regex.IsMatch(readbuffer, "L[0-4]C[0-9]") Then
                         ' ファイルを 1 行ずつ読み込む
                         ' 読み込んだものを追加で格納する
                         AutoCommand(s) = readbuffer
@@ -831,28 +832,39 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub AutoRun(ByVal NowText As String)
+        'コマンドの種類別に実行
+        If Not NowText = "" Then
+            If System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]") And NowText.Length = 2 Then
+                'Lコマンド　LHLのロード
+                If IsNumeric(NowText.Substring(1, 1)) Then
+                    LoadlhlFile(lhlList(NowText.Substring(1, 1)))
+                End If
+            ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "C[0-9]") And NowText.Length = 2 Then
+                'Cコマンド モードチェンジ
+                If IsNumeric(NowText.Substring(1, 1)) Then
+                    ModeChange(NowText.Substring(1, 1))
+                End If
+            ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "P[0-2]") And NowText.Length = 2 Then
+                'Pコマンド　プレイ
+                If IsNumeric(NowText.Substring(1, 1)) Then
+                    PlaySound(NowText.Substring(1, 1))
+                End If
+            ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]C[0-9]") And NowText.Length = 4 Then
+                'LCコマンド LHLのロード　＆　モードチェンジ
+                If IsNumeric(NowText.Substring(1, 1)) And IsNumeric(NowText.Substring(3, 1)) Then
+                    LoadlhlFile(lhlList(NowText.Substring(1, 1)))
+                    ModeChange(NowText.Substring(3, 1))
+                End If
+            End If
+        End If
+    End Sub
+
     Private Sub AutoNextButton_Click(sender As Object, e As EventArgs) Handles AutoNextButton.Click
         If ComNum <= ComLength - 1 Then
             Dim NowText As String = AutoNextBox.Text
 
-            'コマンドの種類別に実行
-            If Not NowText = "" Then
-                If System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]") Then
-                    If IsNumeric(NowText.Substring(1, 1)) Then
-                        LoadlhlFile(lhlList(NowText.Substring(1, 1)))
-                    End If
-                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "C[0-9]") Then
-                    If IsNumeric(NowText.Substring(1, 1)) Then
-                        ModeChange(NowText.Substring(1, 1))
-                    End If
-                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "P[0-2]") Then
-                    If IsNumeric(NowText.Substring(1, 1)) Then
-                        PlaySound(NowText.Substring(1, 1))
-                    End If
-                End If
-            End If
-
-
+            AutoRun(NowText)
 
             '表示の変更
             If ComNum = 0 Then
@@ -885,23 +897,7 @@ Public Class Form1
         If 2 <= ComNum Then
             Dim NowText As String = AutoPrevBox.Text
 
-            If Not NowText = "" Then
-                If System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]") Then
-                    If IsNumeric(NowText.Substring(1, 1)) Then
-                        LoadlhlFile(lhlList(NowText.Substring(1, 1)))
-                    End If
-                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "C[0-9]") Then
-                    If IsNumeric(NowText.Substring(1, 1)) Then
-                        ModeChange(NowText.Substring(1, 1))
-                    End If
-                ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "P[0-2]") Then
-                    If IsNumeric(NowText.Substring(1, 1)) Then
-                        PlaySound(NowText.Substring(1, 1))
-                    End If
-                End If
-            End If
-
-
+            AutoRun(NowText)
 
             ComNum -= 1
 
@@ -920,28 +916,15 @@ Public Class Form1
         LabelCm.Text = ComNum.ToString + "/" + ComLength.ToString
     End Sub
 
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles AutoBackButton.Click
+    Private Sub AutoBackButton_Click(sender As Object, e As EventArgs) Handles AutoBackButton.Click
         ComNum = 0
         AutoPrevBox.Text = ""
         AutoNowBox.Text = ""
         AutoNextBox.Text = AutoCommand(0)
 
         Dim NowText As String = AutoNextBox.Text
-        If Not NowText = "" Then
-            If System.Text.RegularExpressions.Regex.IsMatch(NowText, "L[0-4]") Then
-                If IsNumeric(NowText.Substring(1, 1)) Then
-                    LoadlhlFile(lhlList(NowText.Substring(1, 1)))
-                End If
-            ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "C[0-9]") Then
-                If IsNumeric(NowText.Substring(1, 1)) Then
-                    ModeChange(NowText.Substring(1, 1))
-                End If
-            ElseIf System.Text.RegularExpressions.Regex.IsMatch(NowText, "P[0-2]") Then
-                If IsNumeric(NowText.Substring(1, 1)) Then
-                    PlaySound(NowText.Substring(1, 1))
-                End If
-            End If
-        End If
+
+        AutoRun(NowText)
 
         LabelCm.Text = "1/" + ComLength.ToString
     End Sub
