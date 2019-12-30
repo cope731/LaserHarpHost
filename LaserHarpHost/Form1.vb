@@ -502,6 +502,9 @@ Public Class Form1
             Dim databyte As Byte
             databyte = Convert.ToByte(data)
             PlaySound(databyte)
+        ElseIf data = "S" Then
+            AutoNextButton.PerformClick
+
         End If
 
     End Sub
